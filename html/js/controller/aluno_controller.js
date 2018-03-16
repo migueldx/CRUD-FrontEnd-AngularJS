@@ -69,13 +69,13 @@ App.controller('AlunoController', ['$scope', 'AlunoService', function($scope, Al
                }
            }
                
-        //   self.remove = function(id){
-        //       console.log('id to be deleted', id);
-        //       if(self.user.id === id) {//clean the form if the user to be deleted is shown there.
-        //           self.reset();
-        //       }
-        //       self.deleteUser(id);
-        //   }
+           self.remover = function(id){
+               console.log('id to be deleted', id);
+               if(self.aluno.id === id) {//clean the form if the user to be deleted is shown there.
+                   self.limpar();
+               }
+               self.deletarAluno(id);
+           }
  
           self.limpar = function(){
               self.aluno={id:null,username:'',address:'',email:''};
