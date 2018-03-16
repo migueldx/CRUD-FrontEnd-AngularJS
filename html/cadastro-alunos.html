@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+
+    <div ng-controller="AlunoController as ctrl">
+
+        <p>Cadastro de Alunos Utilizando AngularJs</p>
+        <form ng-submit="ctrl.submit()" name="myForm">
+            <input type="hidden" ng-model="ctrl.aluno.id">
+            <input placeholder="Nome" ng-model="ctrl.aluno.nome">
+            <input type="submit" value="{{!ctrl.aluno.id ? 'Salvar' : 'Atualizar'}}" ng-disabled="myForm.$invalid">
+            <button type="button" ng-click="ctrl.limpar()" ng-disabled="myForm.$pristine">Limpar</button>
+        </form>
+
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="a in ctrl.alunos">
+                    <td><span ng-bind="a.id"></span></td>
+                    <td><span ng-bind="a.nome"></span></td>
+                    <td>
+                        <button type="button" ng-click="ctrl.editar(a.id)">Editar</button>
+                        <button type="button" ng-click="ctrl.deletarAluno(a.id)">Remover</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    
+
+
+
+    <script src="./js/app/app.js"></script>
+    <script src="./js/service/aluno_service.js"></script>
+    <script src="./js/controller/aluno_controller.js"></script>
+
+    <!--<script>
+     
+angular.module('myApp', [])
+.controller('Controller', function ($scope, $http) {
+
+            $scope.aluno = { id: "", nome: "" };
+
+            $http({
+                method: "GET",
+                url: "http://192.168.0.5:8081/aluno/",
+            }).then(function mySuccess(response) {
+                $scope.alunos = response.data;
+            }, function myError(response) {
+                $scope.alunos = response.statusText;
+            });
+
+
+            $scope.salvar = function () {
+                $http({
+                    method: "POST",
+                    url: "http://192.168.0.5:8081/aluno/",
+                    headers: {
+                        'Content-Type': "application/json; charset=utf-8"
+                    },
+                    data: { nome: $scope.aluno.nome }
+                }).then(function mySuccess(response) {
+                    $scope.listarTodos();
+                }, function myError(response) {
+                    $scope.aluno = response.statusText;
+                });
+            }
+
+            $scope.listarTodos = function () {
+                $http({
+                    method: "GET",
+                    url: "http://192.168.0.5:8081/aluno/",
+                }).then(function mySuccess(response) {
+                    $scope.alunos = response.data;
+                }, function myError(response) {
+                    $scope.alunos = response.statusText;
+                });
+            }
+        });
+    </script>-->
+</body>
+
+</html>
